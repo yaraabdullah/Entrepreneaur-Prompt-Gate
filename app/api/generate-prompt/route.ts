@@ -72,24 +72,58 @@ Generate a comprehensive, best-practice-aligned prompt that will guide the entre
 - Professional and authoritative
 - Ready for immediate use with AI models`
 
-    // Use gemini-pro (most widely available and compatible)
-    const model = genAI.getGenerativeModel({ 
-      model: 'gemini-pro',
-      generationConfig: {
-        temperature: 0.7,
-        topK: 40,
-        topP: 0.95,
-        maxOutputTokens: 2000,
-      },
-    })
+    // First, try to get available models
+    let modelName = 'gemini-1.5-flash'
+    let generatedPrompt = ''
+    
+    // Try newer models first, then fallback
+    const modelOptions = [
+      'gemini-1.5-flash',
+      'gemini-1.5-pro', 
+      'models/gemini-1.5-flash',
+      'models/gemini-1.5-pro',
+      'gemini-pro',
+      'models/gemini-pro'
+    ]
+    
+    let lastError: any = null
+    
+    for (const option of modelOptions) {
+      try {
+        const model = genAI.getGenerativeModel({ 
+          model: option,
+          generationConfig: {
+            temperature: 0.7,
+            topK: 40,
+            topP: 0.95,
+            maxOutputTokens: 2000,
+          },
+        })
 
-    const result = await model.generateContent(fullPrompt)
-    const response = await result.response
-    const generatedPrompt = response.text()
-
+        const result = await model.generateContent(fullPrompt)
+        const response = await result.response
+        generatedPrompt = response.text()
+        
+        if (generatedPrompt && generatedPrompt.trim()) {
+          modelName = option
+          break
+        }
+      } catch (error: any) {
+        lastError = error
+        // Try next model
+        continue
+      }
+    }
+    
+    // If all failed, return helpful error message
     if (!generatedPrompt) {
+      const errorMessage = lastError?.message || 'No available models'
       return NextResponse.json(
-        { error: 'Failed to generate prompt' },
+        { 
+          error: `No available Gemini models found. Please verify your API key and model access.`,
+          details: lastError?.message || 'Make sure your Gemini API key has access to generateContent models. You may need to enable the Gemini API in Google Cloud Console.',
+          suggestion: 'Check available models and API setup at https://ai.google.dev/models or https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com'
+        },
         { status: 500 }
       )
     }
