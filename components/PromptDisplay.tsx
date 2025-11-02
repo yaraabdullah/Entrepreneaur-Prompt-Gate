@@ -60,7 +60,7 @@ export default function PromptDisplay({
           Send to AI Model
         </button>
         <p className="text-xs font-light text-gray-600 leading-relaxed">
-          Review the generated prompt above. Click "Send to AI Model" to proceed with your deployment platform.
+          Review the generated prompt above. Click &quot;Send to AI Model&quot; to proceed with your deployment platform.
         </p>
       </div>
     </div>
