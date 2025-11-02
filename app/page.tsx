@@ -47,14 +47,30 @@ export default function Home() {
 
       if (!response.ok) {
         const errorData = await response.json()
-        throw new Error(errorData.error || 'Failed to generate prompt')
+        const errorMsg = errorData.error || 'Failed to generate prompt'
+        const details = errorData.details || ''
+        const suggestion = errorData.suggestion || ''
+        const availableModels = errorData.availableModels
+        
+        let fullError = errorMsg
+        if (details) fullError += `\n\n${details}`
+        if (suggestion) fullError += `\n\nSuggestion: ${suggestion}`
+        if (availableModels && Array.isArray(availableModels) && availableModels.length > 0) {
+          fullError += `\n\nAvailable models: ${availableModels.join(', ')}`
+        }
+        
+        setError(fullError)
+        setShowPrompt(false)
+        return
       }
-
+      
       const data = await response.json()
       setGeneratedPrompt(data.prompt)
       setShowPrompt(true)
+      setError('')
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'An error occurred')
+      const errorMsg = err instanceof Error ? err.message : 'An error occurred'
+      setError(`Failed to generate prompt: ${errorMsg}`)
       setShowPrompt(false)
     } finally {
       setIsGenerating(false)
@@ -103,8 +119,8 @@ export default function Home() {
             />
             <div className="mt-16 space-y-4">
               {error && (
-                <div className="border-t border-b border-gray-300 py-4">
-                  <p className="text-xs font-light text-gray-600 uppercase tracking-wider">
+                <div className="border-t border-b border-gray-300 py-6">
+                  <p className="text-xs font-light text-gray-600 uppercase tracking-wider whitespace-pre-line leading-relaxed">
                     {error}
                   </p>
                 </div>

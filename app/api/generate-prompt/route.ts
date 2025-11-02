@@ -5,6 +5,32 @@ import { StageAnswers } from '@/lib/stages'
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
 
+// Helper function to list available models
+async function listAvailableModels(): Promise<string[]> {
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models?key=${process.env.GEMINI_API_KEY}`,
+      { method: 'GET' }
+    )
+    
+    if (!response.ok) {
+      console.error('Failed to list models:', response.status, response.statusText)
+      return []
+    }
+    
+    const data = await response.json()
+    const models = data.models
+      ?.filter((m: any) => m.supportedGenerationMethods?.includes('generateContent'))
+      ?.map((m: any) => m.name?.replace('models/', '') || m.name)
+      .filter(Boolean) || []
+    
+    return models
+  } catch (error) {
+    console.error('Error listing models:', error)
+    return []
+  }
+}
+
 export async function POST(request: NextRequest) {
   try {
     const { stageId, answers } = await request.json()
@@ -72,26 +98,32 @@ Generate a comprehensive, best-practice-aligned prompt that will guide the entre
 - Professional and authoritative
 - Ready for immediate use with AI models`
 
-    // First, try to get available models
-    let modelName = 'gemini-1.5-flash'
+    // First, try to list available models
+    const availableModels = await listAvailableModels()
+    
+    // Build list of models to try - prefer available ones, then fallback to common names
+    const modelOptions = availableModels.length > 0 
+      ? availableModels 
+      : [
+          'gemini-1.5-flash',
+          'gemini-1.5-pro',
+          'gemini-1.0-pro-latest',
+          'gemini-pro',
+          'gemini-pro-vision'
+        ]
+    
     let generatedPrompt = ''
-    
-    // Try newer models first, then fallback
-    const modelOptions = [
-      'gemini-1.5-flash',
-      'gemini-1.5-pro', 
-      'models/gemini-1.5-flash',
-      'models/gemini-1.5-pro',
-      'gemini-pro',
-      'models/gemini-pro'
-    ]
-    
     let lastError: any = null
+    let usedModel = ''
     
-    for (const option of modelOptions) {
+    // Try each model until one works
+    for (const modelOption of modelOptions) {
       try {
+        // Remove 'models/' prefix if present
+        const cleanModelName = modelOption.replace(/^models\//, '')
+        
         const model = genAI.getGenerativeModel({ 
-          model: option,
+          model: cleanModelName,
           generationConfig: {
             temperature: 0.7,
             topK: 40,
@@ -102,10 +134,11 @@ Generate a comprehensive, best-practice-aligned prompt that will guide the entre
 
         const result = await model.generateContent(fullPrompt)
         const response = await result.response
-        generatedPrompt = response.text()
+        const text = response.text()
         
-        if (generatedPrompt && generatedPrompt.trim()) {
-          modelName = option
+        if (text && text.trim()) {
+          generatedPrompt = text
+          usedModel = cleanModelName
           break
         }
       } catch (error: any) {
@@ -117,12 +150,20 @@ Generate a comprehensive, best-practice-aligned prompt that will guide the entre
     
     // If all failed, return helpful error message
     if (!generatedPrompt) {
-      const errorMessage = lastError?.message || 'No available models'
+      const errorDetails = lastError?.message || 'Unknown error'
+      const apiKeyPreview = process.env.GEMINI_API_KEY 
+        ? `${process.env.GEMINI_API_KEY.substring(0, 10)}...` 
+        : 'Not set'
+      
       return NextResponse.json(
         { 
           error: `No available Gemini models found. Please verify your API key and model access.`,
-          details: lastError?.message || 'Make sure your Gemini API key has access to generateContent models. You may need to enable the Gemini API in Google Cloud Console.',
-          suggestion: 'Check available models and API setup at https://ai.google.dev/models or https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com'
+          details: errorDetails,
+          availableModels: availableModels.length > 0 ? availableModels : 'Could not fetch available models',
+          apiKeyPreview: apiKeyPreview,
+          suggestion: availableModels.length === 0 
+            ? 'Your API key may not have access to list models. Try enabling "Generative Language API" in Google Cloud Console: https://console.cloud.google.com/apis/library/generativelanguage.googleapis.com'
+            : 'Check available models and API setup at https://ai.google.dev/models'
         },
         { status: 500 }
       )
