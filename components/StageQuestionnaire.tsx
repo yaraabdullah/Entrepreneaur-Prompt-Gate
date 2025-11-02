@@ -25,11 +25,15 @@ export default function StageQuestionnaire({
       </div>
 
       <div className="space-y-12">
-        {stage.questions.map((question) => (
-          <div key={question.id}>
+        {stage.questions.map((question, index) => (
+          <div 
+            key={question.id}
+            className="transition-opacity duration-300"
+            style={{ animationDelay: `${index * 50}ms` }}
+          >
             <label className="block text-xs font-normal text-gray-900 mb-6 uppercase tracking-wider">
               {question.label}
-              {question.required && <span className="ml-2">*</span>}
+              {question.required && <span className="ml-2 text-gray-900">*</span>}
             </label>
             {question.type === 'textarea' ? (
               <textarea
@@ -38,7 +42,7 @@ export default function StageQuestionnaire({
                 placeholder={question.placeholder}
                 required={question.required}
                 rows={4}
-                className="w-full px-0 py-4 border-0 border-b border-gray-300 focus:border-gray-900 transition-colors bg-transparent text-sm font-light text-gray-900 resize-none placeholder-gray-400 focus:outline-none"
+                className="w-full px-0 py-4 border-0 border-b border-gray-300 focus:border-gray-900 transition-all duration-200 bg-transparent text-sm font-light text-gray-900 resize-none placeholder-gray-400 focus:outline-none focus:pb-6"
               />
             ) : (
               <input
@@ -47,7 +51,7 @@ export default function StageQuestionnaire({
                 onChange={(e) => onAnswerChange(question.id, e.target.value)}
                 placeholder={question.placeholder}
                 required={question.required}
-                className="w-full px-0 py-4 border-0 border-b border-gray-300 focus:border-gray-900 transition-colors bg-transparent text-sm font-light text-gray-900 placeholder-gray-400 focus:outline-none"
+                className="w-full px-0 py-4 border-0 border-b border-gray-300 focus:border-gray-900 transition-all duration-200 bg-transparent text-sm font-light text-gray-900 placeholder-gray-400 focus:outline-none focus:pb-6"
               />
             )}
           </div>

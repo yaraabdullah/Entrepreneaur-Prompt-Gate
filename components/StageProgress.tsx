@@ -18,20 +18,34 @@ export default function StageProgress({
           <button
             key={stage.id}
             onClick={() => onStageSelect(index)}
-            className={`text-left ${
+            className={`text-left transition-all duration-300 ${
               index === currentStageIndex
-                ? 'border-b border-gray-900 pb-2'
-                : 'opacity-40 hover:opacity-60 transition-opacity'
+                ? 'border-b-2 border-gray-900 pb-2'
+                : 'opacity-40 hover:opacity-70 hover:translate-y-[-2px]'
             }`}
           >
-            <div className="text-xs font-normal text-gray-900 uppercase tracking-wider mb-1">
+            <div className={`text-xs font-normal uppercase tracking-wider mb-1 transition-colors ${
+              index === currentStageIndex ? 'text-gray-900' : 'text-gray-600'
+            }`}>
               {String(index + 1).padStart(2, '0')}
             </div>
-            <div className="text-sm font-light text-gray-900 leading-relaxed">
+            <div className={`text-sm font-light leading-relaxed transition-colors ${
+              index === currentStageIndex ? 'text-gray-900' : 'text-gray-700'
+            }`}>
               {stage.title}
             </div>
           </button>
         ))}
+      </div>
+      
+      {/* Progress bar */}
+      <div className="mt-12 pt-8 border-t border-gray-200">
+        <div className="relative h-px bg-gray-200">
+          <div 
+            className="absolute top-0 left-0 h-full bg-gray-900 transition-all duration-500 ease-out"
+            style={{ width: `${((currentStageIndex + 1) / stages.length) * 100}%` }}
+          />
+        </div>
       </div>
     </div>
   )
