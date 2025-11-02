@@ -1,120 +1,124 @@
 'use client'
 
 import { useState } from 'react'
-import FormSection from '@/components/FormSection'
+import { stages, StageAnswers, generatePromptForStage } from '@/lib/stages'
+import StageQuestionnaire from '@/components/StageQuestionnaire'
+import StageProgress from '@/components/StageProgress'
 import PromptDisplay from '@/components/PromptDisplay'
 import NavigationButtons from '@/components/NavigationButtons'
 
 export default function Home() {
-  const [formData, setFormData] = useState({
-    entrepreneurName: '',
-    companyName: '',
-    sourcesOfIncome: '',
-    companyDescription: '',
-    targetAudience: '',
-    uniqueValue: '',
-    industry: '',
-    businessGoals: '',
-    preferredStyle: '',
-    keyFeatures: '',
-    contactInfo: '',
-  })
-
+  const [currentStageIndex, setCurrentStageIndex] = useState(0)
+  const [allAnswers, setAllAnswers] = useState<{ [stageId: string]: StageAnswers }>({})
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('')
   const [showPrompt, setShowPrompt] = useState(false)
 
+  const currentStage = stages[currentStageIndex]
+  const currentAnswers = allAnswers[currentStage.id] || {}
+
+  const handleAnswerChange = (questionId: string, value: string) => {
+    setAllAnswers({
+      ...allAnswers,
+      [currentStage.id]: {
+        ...currentAnswers,
+        [questionId]: value
+      }
+    })
+  }
+
   const generatePrompt = () => {
-    const prompt = `Create a modern, professional website for ${formData.companyName}, founded by ${formData.entrepreneurName}.
-
-BUSINESS OVERVIEW:
-${formData.companyDescription}
-
-TARGET AUDIENCE:
-${formData.targetAudience}
-
-UNIQUE VALUE PROPOSITION:
-${formData.uniqueValue}
-
-INDUSTRY & NICHE:
-${formData.industry}
-
-REVENUE STREAMS:
-${formData.sourcesOfIncome}
-
-BUSINESS GOALS:
-${formData.businessGoals}
-
-DESIGN REQUIREMENTS:
-- Style: ${formData.preferredStyle}
-- Key Features: ${formData.keyFeatures}
-- Modern, responsive design
-- Fast loading times
-- SEO optimized
-- Mobile-first approach
-
-FUNCTIONAL REQUIREMENTS:
-${formData.contactInfo ? `- Contact form: ${formData.contactInfo}` : ''}
-- Clear call-to-action buttons
-- Professional color scheme aligned with brand
-- User-friendly navigation
-- Accessibility compliant (WCAG 2.1 AA)
-
-TECHNICAL SPECIFICATIONS:
-- Responsive design (mobile, tablet, desktop)
-- Fast page load speeds
-- SEO-friendly structure
-- Clean, semantic HTML
-- Modern CSS with animations
-- Best practices for web development
-
-Please create a complete, production-ready website that represents ${formData.companyName} professionally while incorporating all the specified business goals and features. Ensure the design is visually appealing, user-friendly, and optimized for conversions.`
-
+    const prompt = generatePromptForStage(currentStage.id, currentAnswers)
     setGeneratedPrompt(prompt)
     setShowPrompt(true)
   }
 
+  const canGeneratePrompt = () => {
+    return currentStage.questions
+      .filter(q => q.required)
+      .every(q => currentAnswers[q.id]?.trim())
+  }
+
+  const handleSendToAI = () => {
+    // Navigate to deployment platforms section
+    const element = document.getElementById('deployment-section')
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 py-8 px-4">
-      <div className="max-w-6xl mx-auto">
+    <main className="min-h-screen bg-white">
+      <div className="max-w-6xl mx-auto px-8 py-24">
         {/* Header */}
-        <div className="text-center mb-12 animate-slideIn">
-          <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-4">
-            🚀 Entrepreneur Prompt Gate
+        <div className="mb-24 border-t border-gray-900 pt-12">
+          <h1 className="text-5xl font-light tracking-tight text-gray-900 mb-6 leading-tight">
+            Entrepreneur Journey
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Generate the perfect AI prompt for your business website. Get professional results from GenSpark, Manus, and Lovable.
+          <p className="text-sm text-gray-600 font-light leading-relaxed max-w-2xl uppercase tracking-wider">
+            A guided approach to building your entrepreneurial project, stage by stage
           </p>
         </div>
 
-        {/* Main Content */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Form Section */}
-          <div className="space-y-6">
-            <FormSection formData={formData} setFormData={setFormData} />
-            <button
-              onClick={generatePrompt}
-              disabled={!formData.companyName || !formData.companyDescription}
-              className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-            >
-              ✨ Generate Perfect Prompt
-            </button>
+        {/* Stage Progress */}
+        <StageProgress
+          currentStageIndex={currentStageIndex}
+          onStageSelect={setCurrentStageIndex}
+        />
+
+        <div className="grid lg:grid-cols-2 gap-24 mt-24">
+          {/* Question Section */}
+          <div>
+            <StageQuestionnaire
+              stage={currentStage}
+              answers={currentAnswers}
+              onAnswerChange={handleAnswerChange}
+            />
+            <div className="mt-16">
+              <button
+                onClick={generatePrompt}
+                disabled={!canGeneratePrompt()}
+                className={`w-full border-t border-b border-gray-900 py-6 text-sm font-normal text-gray-900 uppercase tracking-wider transition-opacity ${
+                  canGeneratePrompt()
+                    ? 'hover:opacity-60'
+                    : 'opacity-20 cursor-not-allowed'
+                }`}
+              >
+                Generate Prompt
+              </button>
+            </div>
           </div>
 
           {/* Prompt Display Section */}
-          <div className="space-y-6">
+          <div>
             {showPrompt && (
-              <PromptDisplay prompt={generatedPrompt} />
+              <>
+                <PromptDisplay
+                  prompt={generatedPrompt}
+                  stageTitle={currentStage.title}
+                  onSendToAI={handleSendToAI}
+                />
+                <div id="deployment-section" className="mt-24">
+                  <NavigationButtons prompt={generatedPrompt} />
+                </div>
+              </>
             )}
-            {showPrompt && <NavigationButtons />}
+            {!showPrompt && (
+              <div className="border-t border-gray-900 pt-12">
+                <p className="text-xs font-light text-gray-600 leading-relaxed uppercase tracking-wider">
+                  Complete the questions and generate your optimized prompt
+                </p>
+              </div>
+            )}
           </div>
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center text-gray-600">
-          <p>Made with ❤️ for entrepreneurs who want to build amazing websites</p>
+        <div className="mt-48 pt-24 border-t border-gray-900">
+          <p className="text-xs font-light text-gray-600 uppercase tracking-wider text-center">
+            Enterprise-grade prompt generation for entrepreneurial journeys
+          </p>
         </div>
       </div>
     </main>
   )
 }
-

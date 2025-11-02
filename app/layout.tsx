@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
-
 export const metadata: Metadata = {
-  title: 'Entrepreneur Prompt Gate - Generate Perfect AI Website Prompts',
-  description: 'Generate optimized prompts for AI website builders based on your business information',
+  title: 'Entrepreneur Journey - Stage-by-Stage Prompt Generator',
+  description: 'A guided approach to building your entrepreneurial project, stage by stage. Generate optimized prompts for each phase of your entrepreneurial journey.',
 }
 
 export default function RootLayout({
@@ -16,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body>{children}</body>
     </html>
   )
 }
