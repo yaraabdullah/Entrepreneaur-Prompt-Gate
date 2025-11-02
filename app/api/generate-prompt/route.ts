@@ -72,9 +72,9 @@ Generate a comprehensive, best-practice-aligned prompt that will guide the entre
 - Professional and authoritative
 - Ready for immediate use with AI models`
 
-    // Use gemini-1.5-flash for fast responses or gemini-1.5-pro for better quality
+    // Use gemini-pro (most widely available and compatible)
     const model = genAI.getGenerativeModel({ 
-      model: 'gemini-1.5-flash',
+      model: 'gemini-pro',
       generationConfig: {
         temperature: 0.7,
         topK: 40,
