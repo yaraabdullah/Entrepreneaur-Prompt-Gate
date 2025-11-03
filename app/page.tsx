@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { stages, StageAnswers } from '@/lib/stages'
 import StageQuestionnaire from '@/components/StageQuestionnaire'
 import StageProgress from '@/components/StageProgress'
@@ -8,12 +9,24 @@ import PromptDisplay from '@/components/PromptDisplay'
 import NavigationButtons from '@/components/NavigationButtons'
 
 export default function Home() {
+  const router = useRouter()
+  const [isChecking, setIsChecking] = useState(true)
   const [currentStageIndex, setCurrentStageIndex] = useState(0)
   const [allAnswers, setAllAnswers] = useState<{ [stageId: string]: StageAnswers }>({})
   const [generatedPrompt, setGeneratedPrompt] = useState<string>('')
   const [showPrompt, setShowPrompt] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState<string>('')
+
+  useEffect(() => {
+    // Check if user has signed up
+    const userSignedUp = localStorage.getItem('userSignedUp')
+    if (!userSignedUp) {
+      router.push('/signup')
+    } else {
+      setIsChecking(false)
+    }
+  }, [router])
 
   const currentStage = stages[currentStageIndex]
   const currentAnswers = allAnswers[currentStage.id] || {}
@@ -88,6 +101,26 @@ export default function Home() {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  // Show loading state while checking sign-up
+  if (isChecking) {
+    return (
+      <main className="min-h-screen bg-gradient-to-b from-white via-gray-50 to-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="border-t border-b border-gray-300 py-8 mb-6">
+            <div className="flex items-center gap-4">
+              <div className="flex-1 h-px bg-gray-200"></div>
+              <div className="w-1 h-1 bg-gray-900 rounded-full animate-pulse"></div>
+              <div className="flex-1 h-px bg-gray-200"></div>
+            </div>
+          </div>
+          <p className="text-xs font-light text-gray-600 uppercase tracking-wider">
+            Loading...
+          </p>
+        </div>
+      </main>
+    )
   }
 
   return (

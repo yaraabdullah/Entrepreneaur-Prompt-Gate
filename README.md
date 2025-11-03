@@ -44,6 +44,8 @@ npm install
 ```bash
 # Create a .env.local file
 GEMINI_API_KEY=your_gemini_api_key_here
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 4. Run the development server:
@@ -84,6 +86,44 @@ git push -u origin main
 ## Environment Variables
 
 - `GEMINI_API_KEY` (required): Your Google Gemini API key for generating optimized prompts ([Get one here](https://makersuite.google.com/app/apikey))
+- `NEXT_PUBLIC_SUPABASE_URL` (required): Your Supabase project URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY` (required): Your Supabase anonymous/public key
+
+## Supabase Setup
+
+1. Create a Supabase account at [supabase.com](https://supabase.com)
+2. Create a new project
+3. Go to **SQL Editor** and run the following SQL to create the users table:
+
+```sql
+CREATE TABLE users (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  phone TEXT NOT NULL,
+  first_name TEXT NOT NULL,
+  last_name TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Enable Row Level Security (optional but recommended)
+ALTER TABLE users ENABLE ROW LEVEL SECURITY;
+
+-- Create a policy that allows insert for all (for sign-up)
+CREATE POLICY "Allow public insert" ON users
+  FOR INSERT
+  TO public
+  WITH CHECK (true);
+
+-- Create a policy that allows select for authenticated users (optional)
+CREATE POLICY "Allow select for authenticated" ON users
+  FOR SELECT
+  TO authenticated
+  USING (true);
+```
+
+4. Go to **Settings** → **API** to get your:
+   - Project URL (use as `NEXT_PUBLIC_SUPABASE_URL`)
+   - `anon` `public` key (use as `NEXT_PUBLIC_SUPABASE_ANON_KEY`)
 
 ## Entrepreneurial Stages
 
