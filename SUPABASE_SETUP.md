@@ -50,7 +50,7 @@ CREATE POLICY "Allow public insert" ON users
 Add these to your `.env.local` file:
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_URL=https://rjsiyhwuxuiyqbmvabza.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key_here
 ```
 

@@ -79,6 +79,9 @@ export default function SignUpPage() {
       <div className="max-w-md w-full">
         {/* Header */}
         <div className="mb-16 border-t border-gray-900 pt-12">
+          <h2 className="text-sm font-light text-gray-600 uppercase tracking-wider mb-8">
+            Welcome to the Entrepreneur Prompt Gate
+          </h2>
           <h1 className="text-5xl font-light tracking-tight text-gray-900 mb-6 leading-tight">
             Get Started
           </h1>
