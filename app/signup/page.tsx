@@ -144,7 +144,7 @@ export default function SignUpPage() {
               onChange={(e) => handleChange('phone', e.target.value)}
               required
               className="w-full px-0 py-4 border-0 border-b border-gray-300 focus:border-gray-900 transition-all duration-200 bg-transparent text-sm font-light text-gray-900 placeholder-gray-400 focus:outline-none focus:pb-6"
-              placeholder="+1 (555) 123-4567"
+              placeholder="05XXXXXXXX"
             />
           </div>
 
