@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { LanguageProvider } from '@/contexts/LanguageContext'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export const metadata: Metadata = {
   title: 'Entrepreneur Journey - Stage-by-Stage Prompt Generator',
@@ -13,7 +15,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <LanguageProvider>
+          <LanguageSwitcher />
+          {children}
+        </LanguageProvider>
+      </body>
     </html>
   )
 }

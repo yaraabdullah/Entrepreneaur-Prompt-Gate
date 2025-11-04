@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface SignUpData {
   email: string
@@ -12,6 +13,7 @@ interface SignUpData {
 
 export default function SignUpPage() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [formData, setFormData] = useState<SignUpData>({
     email: '',
     phone: '',
@@ -33,7 +35,7 @@ export default function SignUpPage() {
 
     // Validation
     if (!formData.email || !formData.phone || !formData.firstName || !formData.lastName) {
-      setError('Please fill in all fields')
+      setError(t('fillAllFields'))
       setIsSubmitting(false)
       return
     }
@@ -41,7 +43,7 @@ export default function SignUpPage() {
     // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     if (!emailRegex.test(formData.email)) {
-      setError('Please enter a valid email address')
+      setError(t('validEmail'))
       setIsSubmitting(false)
       return
     }
@@ -65,10 +67,10 @@ export default function SignUpPage() {
         // Redirect to main page
         router.push('/')
       } else {
-        setError(data.error || 'Failed to save information. Please try again.')
+        setError(data.error || t('saveError'))
       }
     } catch (err) {
-      setError('An error occurred. Please try again.')
+      setError(t('errorOccurred'))
     } finally {
       setIsSubmitting(false)
     }
@@ -80,13 +82,10 @@ export default function SignUpPage() {
         {/* Header */}
         <div className="mb-16 border-t border-gray-900 pt-12">
           <h2 className="text-5xl font-light tracking-tight text-gray-900 mb-6 leading-tight">
-            Welcome to the Entrepreneur Prompt Gate
+            {t('welcome')}
           </h2>
-          {/* <h1 className="text-5xl font-light tracking-tight text-gray-900 mb-6 leading-tight">
-            Get Started
-          </h1> */}
           <p className="text-sm text-gray-600 font-light leading-relaxed uppercase tracking-wider">
-            Enter your information to begin your entrepreneurial journey
+            {t('enterInfo')}
           </p>
         </div>
 
@@ -94,7 +93,7 @@ export default function SignUpPage() {
         <form onSubmit={handleSubmit} className="space-y-12">
           <div>
             <label className="block text-xs font-normal text-gray-900 mb-6 uppercase tracking-wider">
-              First Name <span className="ml-2 text-gray-900">*</span>
+              {t('firstName')} <span className="ml-2 text-gray-900">*</span>
             </label>
             <input
               type="text"
@@ -108,7 +107,7 @@ export default function SignUpPage() {
 
           <div>
             <label className="block text-xs font-normal text-gray-900 mb-6 uppercase tracking-wider">
-              Last Name <span className="ml-2 text-gray-900">*</span>
+              {t('lastName')} <span className="ml-2 text-gray-900">*</span>
             </label>
             <input
               type="text"
@@ -122,7 +121,7 @@ export default function SignUpPage() {
 
           <div>
             <label className="block text-xs font-normal text-gray-900 mb-6 uppercase tracking-wider">
-              Email Address <span className="ml-2 text-gray-900">*</span>
+              {t('email')} <span className="ml-2 text-gray-900">*</span>
             </label>
             <input
               type="email"
@@ -136,7 +135,7 @@ export default function SignUpPage() {
 
           <div>
             <label className="block text-xs font-normal text-gray-900 mb-6 uppercase tracking-wider">
-              Phone Number <span className="ml-2 text-gray-900">*</span>
+              {t('phone')} <span className="ml-2 text-gray-900">*</span>
             </label>
             <input
               type="tel"
@@ -165,14 +164,14 @@ export default function SignUpPage() {
                 : 'hover:opacity-60'
             }`}
           >
-            {isSubmitting ? 'Submitting...' : 'Continue'}
+            {isSubmitting ? t('submitting') : t('continue')}
           </button>
         </form>
 
         {/* Footer */}
         <div className="mt-24 pt-12 border-t border-gray-900">
           <p className="text-xs font-light text-gray-600 uppercase tracking-wider text-center">
-            Your information is secure and will only be used for this service
+            {t('infoSecure')}
           </p>
         </div>
       </div>

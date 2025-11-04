@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { stages, StageAnswers } from '@/lib/stages'
 import StageQuestionnaire from '@/components/StageQuestionnaire'
 import StageProgress from '@/components/StageProgress'
@@ -10,6 +11,7 @@ import NavigationButtons from '@/components/NavigationButtons'
 
 export default function Home() {
   const router = useRouter()
+  const { t } = useLanguage()
   const [isChecking, setIsChecking] = useState(true)
   const [currentStageIndex, setCurrentStageIndex] = useState(0)
   const [allAnswers, setAllAnswers] = useState<{ [stageId: string]: StageAnswers }>({})
@@ -116,7 +118,7 @@ export default function Home() {
             </div>
           </div>
           <p className="text-xs font-light text-gray-600 uppercase tracking-wider">
-            Loading...
+            {t('loading')}
           </p>
         </div>
       </main>
@@ -129,10 +131,10 @@ export default function Home() {
         {/* Header */}
         <div className="mb-24 border-t border-gray-900 pt-12">
           <h1 className="text-5xl font-light tracking-tight text-gray-900 mb-6 leading-tight">
-            Entrepreneur Journey
+            {t('entrepreneurJourney')}
           </h1>
           <p className="text-sm text-gray-600 font-light leading-relaxed max-w-2xl uppercase tracking-wider">
-            A guided approach to building your entrepreneurial project, stage by stage
+            {t('guidedApproach')}
           </p>
         </div>
 
@@ -167,7 +169,7 @@ export default function Home() {
                     : 'opacity-20 cursor-not-allowed'
                 }`}
               >
-                {isGenerating ? 'Generating...' : 'Generate Prompt'}
+                {isGenerating ? t('generating') : t('generatePrompt')}
               </button>
             </div>
           </div>
@@ -185,7 +187,7 @@ export default function Home() {
                     </div>
                   </div>
                   <p className="text-xs font-light text-gray-600 uppercase tracking-wider text-center">
-                    Generating optimized prompt...
+                    {t('generating')}...
                   </p>
                 </div>
               </div>
@@ -205,7 +207,7 @@ export default function Home() {
             {!showPrompt && !isGenerating && (
               <div className="border-t border-gray-900 pt-12">
                 <p className="text-xs font-light text-gray-600 leading-relaxed uppercase tracking-wider">
-                  Complete the questions and generate your optimized prompt
+                  {t('completeQuestions')}
                 </p>
               </div>
             )}
@@ -215,7 +217,7 @@ export default function Home() {
         {/* Footer */}
         <div className="mt-48 pt-24 border-t border-gray-900">
           <p className="text-xs font-light text-gray-600 uppercase tracking-wider text-center">
-            Enterprise-grade prompt generation for entrepreneurial journeys
+            {t('enterpriseGrade')}
           </p>
         </div>
       </div>

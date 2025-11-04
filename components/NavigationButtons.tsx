@@ -1,10 +1,13 @@
 'use client'
 
+import { useLanguage } from '@/contexts/LanguageContext'
+
 interface NavigationButtonsProps {
   prompt: string
 }
 
 export default function NavigationButtons({ prompt }: NavigationButtonsProps) {
+  const { t } = useLanguage()
   const platforms = [
     {
       name: 'GenSpark',
@@ -25,10 +28,10 @@ export default function NavigationButtons({ prompt }: NavigationButtonsProps) {
   return (
     <div className="border-t border-gray-900 pt-12">
       <h2 className="text-lg font-normal text-gray-900 mb-6 uppercase tracking-wider">
-        Deployment Platforms
+        {t('deploymentPlatforms')}
       </h2>
       <p className="text-xs font-light text-gray-600 mb-12 leading-relaxed max-w-md">
-        Select your deployment platform and paste the generated prompt to begin.
+        {t('selectPlatform')}
       </p>
       
       <div className="space-y-4">

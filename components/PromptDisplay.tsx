@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface PromptDisplayProps {
   prompt: string
@@ -13,6 +14,7 @@ export default function PromptDisplay({
   stageTitle,
   onSendToAI
 }: PromptDisplayProps) {
+  const { t } = useLanguage()
   const [copied, setCopied] = useState(false)
 
   const copyToClipboard = async () => {
@@ -32,7 +34,7 @@ export default function PromptDisplay({
       <div className="mb-12">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-normal text-gray-900 uppercase tracking-wider">
-            Generated Prompt
+            {t('generatedPrompt')}
           </h2>
           <button
             onClick={copyToClipboard}
@@ -40,7 +42,7 @@ export default function PromptDisplay({
               copied ? 'opacity-60' : 'hover:opacity-60'
             }`}
           >
-            {copied ? 'Copied' : 'Copy'}
+            {copied ? t('copied') : t('copy')}
           </button>
         </div>
         <p className="text-xs font-light text-gray-600 uppercase tracking-wider">
@@ -59,10 +61,10 @@ export default function PromptDisplay({
           onClick={onSendToAI}
           className="w-full border-t border-b border-gray-900 py-6 text-sm font-normal text-gray-900 uppercase tracking-wider hover:opacity-60 transition-all duration-200 hover:bg-gray-50"
         >
-          Send to AI Model
+          {t('sendToAI')}
         </button>
         <p className="text-xs font-light text-gray-600 leading-relaxed">
-          Review the generated prompt above. Click &quot;Send to AI Model&quot; to proceed with your deployment platform.
+          {t('reviewPrompt')}
         </p>
       </div>
     </div>
