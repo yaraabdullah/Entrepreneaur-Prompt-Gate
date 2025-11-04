@@ -56,7 +56,7 @@ const translations: Record<Language, Record<string, string>> = {
   },
   ar: {
     // Signup page
-    'welcome': 'مرحباً بك في بوابة البرومبت لرائد الأعمال',
+    'welcome': 'مرحباً بك في بوابة الأوامر لرائد الأعمال',
     'getStarted': 'ابدأ الآن',
     'enterInfo': 'أدخل معلوماتك لبدء رحلتك الريادية',
     'firstName': 'الاسم الأول',
@@ -74,17 +74,17 @@ const translations: Record<Language, Record<string, string>> = {
     // Main page
     'entrepreneurJourney': 'رحلة رائد الأعمال',
     'guidedApproach': 'نهج موجه لبناء مشروعك الريادي، مرحلة بمرحلة',
-    'generatePrompt': 'إنشاء البرومبت',
+    'generatePrompt': 'إنشاء الأمر',
     'generating': 'جاري الإنشاء...',
-    'generatedPrompt': 'البرومبت المُنشأ',
+    'generatedPrompt': 'الأمر المُنشأ',
     'copy': 'نسخ',
     'copied': 'تم النسخ',
     'sendToAI': 'إرسال إلى نموذج الذكاء الاصطناعي',
-    'reviewPrompt': 'راجع البرومبت المُنشأ أعلاه. اضغط "إرسال إلى نموذج الذكاء الاصطناعي" للمتابعة مع منصة النشر.',
-    'completeQuestions': 'أكمل الأسئلة وأنشئ برومبتك المحسّن',
+    'reviewPrompt': 'راجع الأمر المُنشأ أعلاه. اضغط "إرسال إلى نموذج الذكاء الاصطناعي" للمتابعة مع منصة النشر.',
+    'completeQuestions': 'أكمل الأسئلة وأنشئ أمرمك المحسّن',
     'deploymentPlatforms': 'منصات النشر',
-    'selectPlatform': 'اختر منصة النشر والصق البرومبت المُنشأ لبدء العمل.',
-    'enterpriseGrade': 'إنشاء برومبت احترافي لرحلات ريادة الأعمال',
+    'selectPlatform': 'اختر منصة النشر والصق الأمر المُنشأ لبدء العمل.',
+    'enterpriseGrade': 'إنشاء الأمر احترافي لرحلات ريادة الأعمال',
     'loading': 'جاري التحميل...',
     
     // Stages
