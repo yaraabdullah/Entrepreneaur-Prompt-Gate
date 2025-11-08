@@ -24,7 +24,7 @@ export default function Home() {
     // Check if user has signed up
     const userSignedUp = localStorage.getItem('userSignedUp')
     if (!userSignedUp) {
-      router.push('/signup')
+      router.push('/login')
     } else {
       setIsChecking(false)
     }

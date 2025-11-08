@@ -24,11 +24,23 @@ const translations: Record<Language, Record<string, string>> = {
     'phone': 'Phone Number',
     'continue': 'Continue',
     'submitting': 'Submitting...',
+    'enterEmail': 'Please enter your email address',
     'fillAllFields': 'Please fill in all fields',
     'validEmail': 'Please enter a valid email address',
     'saveError': 'Failed to save information. Please try again.',
     'errorOccurred': 'An error occurred. Please try again.',
     'infoSecure': 'Your information is secure and will only be used for this service',
+    'haveAccount': 'Already have an account?',
+    'goToLogin': 'Go to login',
+    
+    // Login page
+    'welcomeBack': 'Welcome back',
+    'enterLoginInfo': 'Enter your email to continue your journey',
+    'login': 'Log in',
+    'loggingIn': 'Logging in...',
+    'loginError': 'Failed to log in. Please try again.',
+    'noAccount': "Don't have an account?",
+    'goToSignup': 'Sign up instead',
     
     // Main page
     'entrepreneurJourney': 'Entrepreneur Journey',
@@ -65,11 +77,23 @@ const translations: Record<Language, Record<string, string>> = {
     'phone': 'رقم الهاتف',
     'continue': 'متابعة',
     'submitting': 'جاري الإرسال...',
+    'enterEmail': 'يرجى إدخال بريدك الإلكتروني',
     'fillAllFields': 'يرجى ملء جميع الحقول',
     'validEmail': 'يرجى إدخال بريد إلكتروني صحيح',
     'saveError': 'فشل حفظ المعلومات. يرجى المحاولة مرة أخرى.',
     'errorOccurred': 'حدث خطأ. يرجى المحاولة مرة أخرى.',
     'infoSecure': 'معلوماتك آمنة وستُستخدم فقط لهذه الخدمة',
+    'haveAccount': 'هل لديك حساب بالفعل؟',
+    'goToLogin': 'اذهب إلى تسجيل الدخول',
+    
+    // Login page
+    'welcomeBack': 'مرحباً بعودتك',
+    'enterLoginInfo': 'أدخل بريدك الإلكتروني لمتابعة رحلتك',
+    'login': 'تسجيل الدخول',
+    'loggingIn': 'جاري تسجيل الدخول...',
+    'loginError': 'فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.',
+    'noAccount': 'ليس لديك حساب؟',
+    'goToSignup': 'سجل الآن',
     
     // Main page
     'entrepreneurJourney': 'رحلة رائد الأعمال',
