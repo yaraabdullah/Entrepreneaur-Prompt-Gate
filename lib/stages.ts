@@ -4,6 +4,7 @@ export interface Stage {
   defaultTitle: string
   descriptionKey: string
   defaultDescription: string
+  promptInstructions: string[]
   questions: Question[]
 }
 
@@ -28,6 +29,11 @@ export const stages: Stage[] = [
     defaultTitle: 'Idea Generation & Business Model',
     descriptionKey: 'stage1Description',
     defaultDescription: 'Define your core business concept and validate your idea',
+    promptInstructions: [
+      'Focus strictly on validating the business idea, problem-solution fit, and customer segments.',
+      'Transform the user’s inputs into a clear value proposition, customer personas, and assumptions to test.',
+      'Recommend lean validation experiments, data points to collect, and decision criteria before investing in development.'
+    ],
     questions: [
       {
         id: 'businessIdea',
@@ -82,6 +88,11 @@ export const stages: Stage[] = [
     defaultTitle: 'MVP Development',
     descriptionKey: 'stage2Description',
     defaultDescription: 'Build and validate your minimum viable product',
+    promptInstructions: [
+      'Remain fully focused on defining and building the MVP scope, including user journeys, feature prioritisation, and technical architecture.',
+      'Convert the user’s answers into a concrete MVP plan covering pages/screens, core workflows, and success metrics for a first release.',
+      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional website or app quickly.'
+    ],
     questions: [
       {
         id: 'coreFeatures',
@@ -136,6 +147,11 @@ export const stages: Stage[] = [
     defaultTitle: 'Investor Pitching',
     descriptionKey: 'stage3Description',
     defaultDescription: 'Prepare your pitch deck and investor presentation',
+    promptInstructions: [
+      'Stay centred on crafting an investor-ready narrative that highlights traction, market opportunity, and funding needs.',
+      'Use the user’s inputs to outline a compelling pitch structure with data-backed storytelling and clear financial asks.',
+      'Provide persuasive talking points, slide-by-slide guidance, and investor FAQs tailored to the funding round.'
+    ],
     questions: [
       {
         id: 'fundingAmount',
@@ -190,6 +206,11 @@ export const stages: Stage[] = [
     defaultTitle: 'Customer Acquisition & Marketing',
     descriptionKey: 'stage4Description',
     defaultDescription: 'Develop your go-to-market strategy',
+    promptInstructions: [
+      'Concentrate exclusively on go-to-market planning, demand generation, and conversion optimisation.',
+      'Translate the user’s inputs into channel strategies, messaging pillars, and campaign roadmaps tied to measurable KPIs.',
+      'Recommend acquisition experiments, funnel improvements, and retention tactics aligned with the defined target customer.'
+    ],
     questions: [
       {
         id: 'customerSegment',
@@ -244,6 +265,11 @@ export const stages: Stage[] = [
     defaultTitle: 'Scaling & Growth',
     descriptionKey: 'stage5Description',
     defaultDescription: 'Plan for sustainable growth and scaling',
+    promptInstructions: [
+      'Stay focused on scaling strategies such as team expansion, market growth, and process maturation.',
+      'Convert the user’s responses into a phased growth plan with clear milestones, resource allocations, and risk mitigation.',
+      'Recommend operational dashboards, leadership hires, and strategic initiatives that sustain long-term growth.'
+    ],
     questions: [
       {
         id: 'growthStrategy',
@@ -298,6 +324,11 @@ export const stages: Stage[] = [
     defaultTitle: 'Operations & Optimization',
     descriptionKey: 'stage6Description',
     defaultDescription: 'Optimize operations and improve efficiency',
+    promptInstructions: [
+      'Keep the prompt centred on operational efficiency, process optimisation, and quality assurance.',
+      'Translate the user’s inputs into streamlined workflows, automation opportunities, and KPI dashboards.',
+      'Provide a prioritised optimisation roadmap with quick wins, tooling recommendations, and governance practices.'
+    ],
     questions: [
       {
         id: 'operationalEfficiency',
