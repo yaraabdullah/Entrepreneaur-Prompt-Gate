@@ -54,7 +54,7 @@ export async function POST(request: NextRequest) {
     const context = stage.questions
       .map(q => {
         const answer = (answers as StageAnswers)[q.id]
-        return answer ? `${q.label}: ${answer}` : null
+        return answer ? `${q.defaultLabel}: ${answer}` : null
       })
       .filter(Boolean)
       .join('\n')
@@ -83,10 +83,10 @@ Generate prompts that are:
 
 ---
 
-Generate an optimized entrepreneurial prompt for the ${stage.title} stage.
+    Generate an optimized entrepreneurial prompt for the ${stage.defaultTitle} stage.
 
 STAGE CONTEXT:
-${stage.description}
+${stage.defaultDescription}
 
 USER INPUT:
 ${context}

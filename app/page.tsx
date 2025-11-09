@@ -196,7 +196,7 @@ export default function Home() {
               <>
                 <PromptDisplay
                   prompt={generatedPrompt}
-                  stageTitle={currentStage.title}
+                  stageTitle={t(currentStage.titleKey)}
                   onSendToAI={handleSendToAI}
                 />
                 <div id="deployment-section" className="mt-24">

@@ -1,15 +1,19 @@
 export interface Stage {
   id: string
-  title: string
-  description: string
+  titleKey: string
+  defaultTitle: string
+  descriptionKey: string
+  defaultDescription: string
   questions: Question[]
 }
 
 export interface Question {
   id: string
-  label: string
+  labelKey: string
+  defaultLabel: string
   type: 'text' | 'textarea' | 'number'
-  placeholder?: string
+  placeholderKey?: string
+  defaultPlaceholder?: string
   required?: boolean
 }
 
@@ -20,252 +24,324 @@ export interface StageAnswers {
 export const stages: Stage[] = [
   {
     id: 'idea-generation',
-    title: 'Idea Generation & Business Model',
-    description: 'Define your core business concept and validate your idea',
+    titleKey: 'stage1',
+    defaultTitle: 'Idea Generation & Business Model',
+    descriptionKey: 'stage1Description',
+    defaultDescription: 'Define your core business concept and validate your idea',
     questions: [
       {
         id: 'businessIdea',
-        label: 'What is your business idea?',
+        labelKey: 'stage1Q1Label',
+        defaultLabel: 'What is your business idea?',
         type: 'textarea',
-        placeholder: 'Describe your business concept in detail',
+        placeholderKey: 'stage1Q1Placeholder',
+        defaultPlaceholder: 'Describe your business concept in detail',
         required: true
       },
       {
         id: 'problemSolving',
-        label: 'What problem does your idea solve?',
+        labelKey: 'stage1Q2Label',
+        defaultLabel: 'What problem does your idea solve?',
         type: 'textarea',
-        placeholder: 'Describe the specific problem or pain point',
+        placeholderKey: 'stage1Q2Placeholder',
+        defaultPlaceholder: 'Describe the specific problem or pain point',
         required: true
       },
       {
         id: 'targetMarket',
-        label: 'Who is your target market?',
+        labelKey: 'stage1Q3Label',
+        defaultLabel: 'Who is your target market?',
         type: 'textarea',
-        placeholder: 'Define your ideal customer segments',
+        placeholderKey: 'stage1Q3Placeholder',
+        defaultPlaceholder: 'Define your ideal customer segments',
         required: true
       },
       {
         id: 'competitiveAdvantage',
-        label: 'What makes your solution unique?',
+        labelKey: 'stage1Q4Label',
+        defaultLabel: 'What makes your solution unique?',
         type: 'textarea',
-        placeholder: 'Explain your competitive advantage',
+        placeholderKey: 'stage1Q4Placeholder',
+        defaultPlaceholder: 'Explain your competitive advantage',
         required: false
       },
       {
         id: 'revenueModel',
-        label: 'How will you generate revenue?',
+        labelKey: 'stage1Q5Label',
+        defaultLabel: 'How will you generate revenue?',
         type: 'textarea',
-        placeholder: 'Describe your revenue streams and business model',
+        placeholderKey: 'stage1Q5Placeholder',
+        defaultPlaceholder: 'Describe your revenue streams and business model',
         required: false
       }
     ]
   },
   {
     id: 'mvp-development',
-    title: 'MVP Development',
-    description: 'Build and validate your minimum viable product',
+    titleKey: 'stage2',
+    defaultTitle: 'MVP Development',
+    descriptionKey: 'stage2Description',
+    defaultDescription: 'Build and validate your minimum viable product',
     questions: [
       {
         id: 'coreFeatures',
-        label: 'What are the core features of your MVP?',
+        labelKey: 'stage2Q1Label',
+        defaultLabel: 'What are the core features of your MVP?',
         type: 'textarea',
-        placeholder: 'List the essential features that define your MVP',
+        placeholderKey: 'stage2Q1Placeholder',
+        defaultPlaceholder: 'List the essential features that define your MVP',
         required: true
       },
       {
         id: 'techStack',
-        label: 'What technology stack are you considering?',
+        labelKey: 'stage2Q2Label',
+        defaultLabel: 'What technology stack are you considering?',
         type: 'textarea',
-        placeholder: 'Mention technologies, frameworks, or platforms',
+        placeholderKey: 'stage2Q2Placeholder',
+        defaultPlaceholder: 'Mention technologies, frameworks, or platforms',
         required: false
       },
       {
         id: 'timeline',
-        label: 'What is your development timeline?',
+        labelKey: 'stage2Q3Label',
+        defaultLabel: 'What is your development timeline?',
         type: 'text',
-        placeholder: 'e.g., 3 months, 6 months',
+        placeholderKey: 'stage2Q3Placeholder',
+        defaultPlaceholder: 'e.g., 3 months, 6 months',
         required: false
       },
       {
         id: 'successMetrics',
-        label: 'How will you measure MVP success?',
+        labelKey: 'stage2Q4Label',
+        defaultLabel: 'How will you measure MVP success?',
         type: 'textarea',
-        placeholder: 'Define key metrics and validation criteria',
+        placeholderKey: 'stage2Q4Placeholder',
+        defaultPlaceholder: 'Define key metrics and validation criteria',
         required: false
       },
       {
         id: 'challenges',
-        label: 'What are the main technical challenges?',
+        labelKey: 'stage2Q5Label',
+        defaultLabel: 'What are the main technical challenges?',
         type: 'textarea',
-        placeholder: 'Identify potential technical hurdles',
+        placeholderKey: 'stage2Q5Placeholder',
+        defaultPlaceholder: 'Identify potential technical hurdles',
         required: false
       }
     ]
   },
   {
     id: 'investor-pitching',
-    title: 'Investor Pitching',
-    description: 'Prepare your pitch deck and investor presentation',
+    titleKey: 'stage3',
+    defaultTitle: 'Investor Pitching',
+    descriptionKey: 'stage3Description',
+    defaultDescription: 'Prepare your pitch deck and investor presentation',
     questions: [
       {
         id: 'fundingAmount',
-        label: 'How much funding are you seeking?',
+        labelKey: 'stage3Q1Label',
+        defaultLabel: 'How much funding are you seeking?',
         type: 'text',
-        placeholder: 'e.g., $500K seed round',
+        placeholderKey: 'stage3Q1Placeholder',
+        defaultPlaceholder: 'e.g., $500K seed round',
         required: true
       },
       {
         id: 'useOfFunds',
-        label: 'How will you use the funding?',
+        labelKey: 'stage3Q2Label',
+        defaultLabel: 'How will you use the funding?',
         type: 'textarea',
-        placeholder: 'Break down allocation: development, marketing, operations',
+        placeholderKey: 'stage3Q2Placeholder',
+        defaultPlaceholder: 'Break down allocation: development, marketing, operations',
         required: true
       },
       {
         id: 'traction',
-        label: 'What traction do you have?',
+        labelKey: 'stage3Q3Label',
+        defaultLabel: 'What traction do you have?',
         type: 'textarea',
-        placeholder: 'Users, revenue, partnerships, metrics',
+        placeholderKey: 'stage3Q3Placeholder',
+        defaultPlaceholder: 'Users, revenue, partnerships, metrics',
         required: false
       },
       {
         id: 'marketSize',
-        label: 'What is your addressable market size?',
+        labelKey: 'stage3Q4Label',
+        defaultLabel: 'What is your addressable market size?',
         type: 'textarea',
-        placeholder: 'Total Addressable Market (TAM) analysis',
+        placeholderKey: 'stage3Q4Placeholder',
+        defaultPlaceholder: 'Total Addressable Market (TAM) analysis',
         required: false
       },
       {
         id: 'exitStrategy',
-        label: 'What is your exit strategy?',
+        labelKey: 'stage3Q5Label',
+        defaultLabel: 'What is your exit strategy?',
         type: 'textarea',
-        placeholder: 'Long-term vision and exit plans',
+        placeholderKey: 'stage3Q5Placeholder',
+        defaultPlaceholder: 'Long-term vision and exit plans',
         required: false
       }
     ]
   },
   {
     id: 'customer-acquisition',
-    title: 'Customer Acquisition & Marketing',
-    description: 'Develop your go-to-market strategy',
+    titleKey: 'stage4',
+    defaultTitle: 'Customer Acquisition & Marketing',
+    descriptionKey: 'stage4Description',
+    defaultDescription: 'Develop your go-to-market strategy',
     questions: [
       {
         id: 'customerSegment',
-        label: 'Who is your ideal customer?',
+        labelKey: 'stage4Q1Label',
+        defaultLabel: 'Who is your ideal customer?',
         type: 'textarea',
-        placeholder: 'Detailed customer persona and characteristics',
+        placeholderKey: 'stage4Q1Placeholder',
+        defaultPlaceholder: 'Detailed customer persona and characteristics',
         required: true
       },
       {
         id: 'channels',
-        label: 'What marketing channels will you use?',
+        labelKey: 'stage4Q2Label',
+        defaultLabel: 'What marketing channels will you use?',
         type: 'textarea',
-        placeholder: 'Social media, content marketing, paid ads, partnerships',
+        placeholderKey: 'stage4Q2Placeholder',
+        defaultPlaceholder: 'Social media, content marketing, paid ads, partnerships',
         required: true
       },
       {
         id: 'pricingStrategy',
-        label: 'What is your pricing strategy?',
+        labelKey: 'stage4Q3Label',
+        defaultLabel: 'What is your pricing strategy?',
         type: 'textarea',
-        placeholder: 'Pricing model and competitive positioning',
+        placeholderKey: 'stage4Q3Placeholder',
+        defaultPlaceholder: 'Pricing model and competitive positioning',
         required: false
       },
       {
         id: 'valueProposition',
-        label: 'What is your value proposition?',
+        labelKey: 'stage4Q4Label',
+        defaultLabel: 'What is your value proposition?',
         type: 'textarea',
-        placeholder: 'Clear value proposition for your target customers',
+        placeholderKey: 'stage4Q4Placeholder',
+        defaultPlaceholder: 'Clear value proposition for your target customers',
         required: true
       },
       {
         id: 'acquisitionCost',
-        label: 'What is your customer acquisition cost target?',
+        labelKey: 'stage4Q5Label',
+        defaultLabel: 'What is your customer acquisition cost target?',
         type: 'text',
-        placeholder: 'CAC target and LTV:CAC ratio',
+        placeholderKey: 'stage4Q5Placeholder',
+        defaultPlaceholder: 'CAC target and LTV:CAC ratio',
         required: false
       }
     ]
   },
   {
     id: 'scaling-growth',
-    title: 'Scaling & Growth',
-    description: 'Plan for sustainable growth and scaling',
+    titleKey: 'stage5',
+    defaultTitle: 'Scaling & Growth',
+    descriptionKey: 'stage5Description',
+    defaultDescription: 'Plan for sustainable growth and scaling',
     questions: [
       {
         id: 'growthStrategy',
-        label: 'What is your growth strategy?',
+        labelKey: 'stage5Q1Label',
+        defaultLabel: 'What is your growth strategy?',
         type: 'textarea',
-        placeholder: 'Organic growth, partnerships, expansion plans',
+        placeholderKey: 'stage5Q1Placeholder',
+        defaultPlaceholder: 'Organic growth, partnerships, expansion plans',
         required: true
       },
       {
         id: 'teamScaling',
-        label: 'How will you scale your team?',
+        labelKey: 'stage5Q2Label',
+        defaultLabel: 'How will you scale your team?',
         type: 'textarea',
-        placeholder: 'Hiring plans and organizational structure',
+        placeholderKey: 'stage5Q2Placeholder',
+        defaultPlaceholder: 'Hiring plans and organizational structure',
         required: false
       },
       {
         id: 'operationalChallenges',
-        label: 'What operational challenges do you anticipate?',
+        labelKey: 'stage5Q3Label',
+        defaultLabel: 'What operational challenges do you anticipate?',
         type: 'textarea',
-        placeholder: 'Key operational hurdles in scaling',
+        placeholderKey: 'stage5Q3Placeholder',
+        defaultPlaceholder: 'Key operational hurdles in scaling',
         required: false
       },
       {
         id: 'marketExpansion',
-        label: 'Are you planning geographic or market expansion?',
+        labelKey: 'stage5Q4Label',
+        defaultLabel: 'Are you planning geographic or market expansion?',
         type: 'textarea',
-        placeholder: 'Expansion strategy and target markets',
+        placeholderKey: 'stage5Q4Placeholder',
+        defaultPlaceholder: 'Expansion strategy and target markets',
         required: false
       },
       {
         id: 'partnerships',
-        label: 'What strategic partnerships are you pursuing?',
+        labelKey: 'stage5Q5Label',
+        defaultLabel: 'What strategic partnerships are you pursuing?',
         type: 'textarea',
-        placeholder: 'Partnership opportunities and alliances',
+        placeholderKey: 'stage5Q5Placeholder',
+        defaultPlaceholder: 'Partnership opportunities and alliances',
         required: false
       }
     ]
   },
   {
     id: 'operations-optimization',
-    title: 'Operations & Optimization',
-    description: 'Optimize operations and improve efficiency',
+    titleKey: 'stage6',
+    defaultTitle: 'Operations & Optimization',
+    descriptionKey: 'stage6Description',
+    defaultDescription: 'Optimize operations and improve efficiency',
     questions: [
       {
         id: 'operationalEfficiency',
-        label: 'What areas need operational optimization?',
+        labelKey: 'stage6Q1Label',
+        defaultLabel: 'What areas need operational optimization?',
         type: 'textarea',
-        placeholder: 'Processes, workflows, systems that need improvement',
+        placeholderKey: 'stage6Q1Placeholder',
+        defaultPlaceholder: 'Processes, workflows, systems that need improvement',
         required: true
       },
       {
         id: 'automation',
-        label: 'What can be automated?',
+        labelKey: 'stage6Q2Label',
+        defaultLabel: 'What can be automated?',
         type: 'textarea',
-        placeholder: 'Tasks and processes suitable for automation',
+        placeholderKey: 'stage6Q2Placeholder',
+        defaultPlaceholder: 'Tasks and processes suitable for automation',
         required: false
       },
       {
         id: 'keyMetrics',
-        label: 'What are your key operational metrics?',
+        labelKey: 'stage6Q3Label',
+        defaultLabel: 'What are your key operational metrics?',
         type: 'textarea',
-        placeholder: 'KPIs you track for operational performance',
+        placeholderKey: 'stage6Q3Placeholder',
+        defaultPlaceholder: 'KPIs you track for operational performance',
         required: false
       },
       {
         id: 'costOptimization',
-        label: 'Where can you optimize costs?',
+        labelKey: 'stage6Q4Label',
+        defaultLabel: 'Where can you optimize costs?',
         type: 'textarea',
-        placeholder: 'Cost reduction opportunities',
+        placeholderKey: 'stage6Q4Placeholder',
+        defaultPlaceholder: 'Cost reduction opportunities',
         required: false
       },
       {
         id: 'quality',
-        label: 'How do you maintain quality standards?',
+        labelKey: 'stage6Q5Label',
+        defaultLabel: 'How do you maintain quality standards?',
         type: 'textarea',
-        placeholder: 'Quality assurance processes and standards',
+        placeholderKey: 'stage6Q5Placeholder',
+        defaultPlaceholder: 'Quality assurance processes and standards',
         required: false
       }
     ]

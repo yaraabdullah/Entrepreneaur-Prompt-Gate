@@ -14,14 +14,6 @@ export default function StageProgress({
 }: StageProgressProps) {
   const { t } = useLanguage()
   
-  const stageTitles = [
-    t('stage1'),
-    t('stage2'),
-    t('stage3'),
-    t('stage4'),
-    t('stage5'),
-    t('stage6'),
-  ]
   return (
     <div className="border-t border-gray-900 pt-12 pb-12">
       <div className="flex flex-wrap gap-x-12 gap-y-8">
@@ -43,7 +35,7 @@ export default function StageProgress({
             <div className={`text-sm font-light leading-relaxed transition-colors ${
               index === currentStageIndex ? 'text-gray-900' : 'text-gray-700'
             }`}>
-              {stageTitles[index]}
+              {t(stage.titleKey)}
             </div>
           </button>
         ))}
