@@ -61,7 +61,7 @@ export async function POST(request: NextRequest) {
 
     const stageInstructionList = stage.promptInstructions?.length
       ? stage.promptInstructions.map((instruction, index) => `${index + 1}. ${instruction}`).join('\n')
-      : `1. Stay strictly within the scope of the ${stage.defaultTitle} stage.\n2. Use the user’s inputs as the single source of truth.\n3. Provide actionable, implementation-ready guidance.`
+      : `1. Stay strictly within the scope of the ${stage.defaultTitle} stage.\n2. Use the user’s inputs as the single source of truth.\n3. Provide actionable, implementation-ready guidance.\n4. Conclude with the deliverable: ${stage.deliverableDescription}`
 
     // Create a comprehensive prompt for best practices
     const fullPrompt = `You are an expert entrepreneurial consultant and AI prompt engineer. Your task is to generate highly optimized, professional prompts that follow industry best practices for entrepreneurial projects.
@@ -104,6 +104,9 @@ RESPONSE FORMAT REQUIREMENTS:
 - Reference the user’s inputs explicitly so the guidance is personalized.
 - Remain within the scope of the ${stage.defaultTitle} stage and avoid unrelated recommendations.
 - If the user’s inputs describe a digital product, include guidance for crafting or refining the product experience (e.g., website or app structure) aligned with this stage.
+
+EXPECTED OUTPUT:
+- ${stage.deliverableDescription}
 
 Generate a comprehensive, best-practice-aligned prompt that will guide the entrepreneur through this stage. The prompt should be:
 - Well-structured with clear sections

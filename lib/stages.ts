@@ -4,6 +4,7 @@ export interface Stage {
   defaultTitle: string
   descriptionKey: string
   defaultDescription: string
+  deliverableDescription: string
   promptInstructions: string[]
   questions: Question[]
 }
@@ -29,10 +30,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Idea Generation & Business Model',
     descriptionKey: 'stage1Description',
     defaultDescription: 'Define your core business concept and validate your idea',
+    deliverableDescription: 'Deliver a visual business model canvas summarizing customer segments, value propositions, channels, customer relationships, revenue streams, key resources, key activities, key partners, cost structure, and suggested validation experiments.',
     promptInstructions: [
       'Focus strictly on validating the business idea, problem-solution fit, and customer segments.',
       'Transform the user’s inputs into a clear value proposition, customer personas, and assumptions to test.',
-      'Recommend lean validation experiments, data points to collect, and decision criteria before investing in development.'
+      'Recommend lean validation experiments, data points to collect, and decision criteria before investing in development.',
+      'End with a structured business model canvas overview that is ready to hand off to designers for visualization.'
     ],
     questions: [
       {
@@ -88,10 +91,12 @@ export const stages: Stage[] = [
     defaultTitle: 'MVP Development',
     descriptionKey: 'stage2Description',
     defaultDescription: 'Build and validate your minimum viable product',
+    deliverableDescription: 'Deliver a build-ready MVP blueprint describing the website or app architecture, user journeys, prioritized backlog, interface structure (sitemap or screen flow), and technical implementation guidance.',
     promptInstructions: [
       'Remain fully focused on defining and building the MVP scope, including user journeys, feature prioritisation, and technical architecture.',
       'Convert the user’s answers into a concrete MVP plan covering pages/screens, core workflows, and success metrics for a first release.',
-      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional website or app quickly.'
+      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional website or app quickly.',
+      'Conclude with a detailed MVP website/app blueprint that a product squad can execute immediately.'
     ],
     questions: [
       {
@@ -147,10 +152,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Investor Pitching',
     descriptionKey: 'stage3Description',
     defaultDescription: 'Prepare your pitch deck and investor presentation',
+    deliverableDescription: 'Deliver a slide-by-slide investor pitch deck outline covering narrative flow, proof points, funding ask, use of funds, and anticipated investor questions.',
     promptInstructions: [
       'Stay centred on crafting an investor-ready narrative that highlights traction, market opportunity, and funding needs.',
       'Use the user’s inputs to outline a compelling pitch structure with data-backed storytelling and clear financial asks.',
-      'Provide persuasive talking points, slide-by-slide guidance, and investor FAQs tailored to the funding round.'
+      'Provide persuasive talking points, slide-by-slide guidance, and investor FAQs tailored to the funding round.',
+      'Wrap up with a complete investor pitch deck outline that can be transferred into presentation software.'
     ],
     questions: [
       {
@@ -206,10 +213,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Customer Acquisition & Marketing',
     descriptionKey: 'stage4Description',
     defaultDescription: 'Develop your go-to-market strategy',
+    deliverableDescription: 'Deliver a multi-channel acquisition playbook including ICP profiles, messaging pillars, campaign concepts, funnel targets, and 30-60-90 day execution plan.',
     promptInstructions: [
       'Concentrate exclusively on go-to-market planning, demand generation, and conversion optimisation.',
       'Translate the user’s inputs into channel strategies, messaging pillars, and campaign roadmaps tied to measurable KPIs.',
-      'Recommend acquisition experiments, funnel improvements, and retention tactics aligned with the defined target customer.'
+      'Recommend acquisition experiments, funnel improvements, and retention tactics aligned with the defined target customer.',
+      'Finish with a structured go-to-market plan outlining channels, messaging, calendar, and success metrics.'
     ],
     questions: [
       {
@@ -265,10 +274,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Scaling & Growth',
     descriptionKey: 'stage5Description',
     defaultDescription: 'Plan for sustainable growth and scaling',
+    deliverableDescription: 'Deliver a phased scaling roadmap with milestones, OKRs, resourcing plan, organizational changes, and risk mitigation strategies.',
     promptInstructions: [
       'Stay focused on scaling strategies such as team expansion, market growth, and process maturation.',
       'Convert the user’s responses into a phased growth plan with clear milestones, resource allocations, and risk mitigation.',
-      'Recommend operational dashboards, leadership hires, and strategic initiatives that sustain long-term growth.'
+      'Recommend operational dashboards, leadership hires, and strategic initiatives that sustain long-term growth.',
+      'Close with a timeline-based scaling roadmap that executives can review and approve.'
     ],
     questions: [
       {
@@ -324,10 +335,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Operations & Optimization',
     descriptionKey: 'stage6Description',
     defaultDescription: 'Optimize operations and improve efficiency',
+    deliverableDescription: 'Deliver an operations optimisation program detailing process maps, automation opportunities, KPI dashboards, cost-saving initiatives, and quality-control mechanisms.',
     promptInstructions: [
       'Keep the prompt centred on operational efficiency, process optimisation, and quality assurance.',
       'Translate the user’s inputs into streamlined workflows, automation opportunities, and KPI dashboards.',
-      'Provide a prioritised optimisation roadmap with quick wins, tooling recommendations, and governance practices.'
+      'Provide a prioritised optimisation roadmap with quick wins, tooling recommendations, and governance practices.',
+      'Finish with an operations optimisation plan that can be executed by the operations team.'
     ],
     questions: [
       {
