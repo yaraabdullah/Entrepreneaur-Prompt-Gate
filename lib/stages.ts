@@ -32,10 +32,10 @@ export const stages: Stage[] = [
     defaultDescription: 'Define your core business concept and validate your idea',
     deliverableDescription: 'Deliver a visual business model canvas (or lean canvas) summarizing customer segments, value propositions, channels, customer relationships, revenue streams, key resources, key activities, key partners, cost structure, and suggested validation experiments.',
     promptInstructions: [
-      'Focus strictly on validating the business idea, problem-solution fit, and customer segments—do not propose landing pages or MVP build-outs.',
-      'Transform the user’s inputs into a clear value proposition, customer personas, and assumptions to test.',
-      'Recommend lean validation experiments, data points to collect, and decision criteria before investing in development.',
-      'End with a structured business model canvas (or lean canvas) overview that is ready to hand off to designers for visualization.'
+      'Write the final prompt as a direct command to an advanced AI system to produce a complete Business Model Canvas or Lean Canvas for the venture.',
+      'Explicitly require every canvas block (problem, solution, value propositions, customer segments, channels, customer relationships, revenue streams, key resources, key activities, key partners, cost structure, and key metrics/experiments if using lean canvas).',
+      'Inject the user’s inputs as contextual bullet points the target AI must reference when filling each canvas block.',
+      'Forbid any mention of MVPs, landing pages, UI/UX, or development tasks; keep the deliverable strictly focused on the canvas output.'
     ],
     questions: [
       {
@@ -93,11 +93,11 @@ export const stages: Stage[] = [
     defaultDescription: 'Build and validate your minimum viable product',
     deliverableDescription: 'Deliver a build-ready MVP landing page blueprint describing the site architecture, key sections/components, user journeys, prioritized backlog, wireframe guidance, and technical implementation notes.',
     promptInstructions: [
-      'Remain fully focused on defining and building the MVP scope, including user journeys, feature prioritisation, and technical architecture.',
-      'Convert the user’s answers into a concrete MVP plan covering landing page sections, conversion goals, and supporting workflows for a first release.',
-      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional landing page quickly.',
-      'Do not generate business model canvases or high-level strategy summaries—stay focused on the landing page experience and supporting MVP build.',
-      'Conclude with a detailed MVP landing page blueprint—including layout guidance and content prompts—that a product squad can execute immediately.'
+      'Write the final prompt as a direct command to an advanced AI system to design a high-converting MVP landing page (or single-page website) blueprint.',
+      'Spell out required components: IA/sitemap, hero messaging, value proposition copy, feature highlights, social proof, CTAs, onboarding flow, visual direction, and technical implementation notes.',
+      'Embed the user’s answers as context the target AI must use when crafting copy, layout, and prioritised backlog items.',
+      'Explicitly exclude Business Model Canvas or strategy canvas instructions; focus on UI/UX, copywriting, and build tasks for the landing page.',
+      'Require the final prompt to deliver wireframe-level detail, content blocks, success metrics, and developer hand-off guidance.'
     ],
     questions: [
       {
@@ -155,10 +155,10 @@ export const stages: Stage[] = [
     defaultDescription: 'Prepare your pitch deck and investor presentation',
     deliverableDescription: 'Deliver a slide-by-slide investor pitch deck outline covering narrative flow, proof points, funding ask, use of funds, and anticipated investor questions.',
     promptInstructions: [
-      'Stay centred on crafting an investor-ready narrative that highlights traction, market opportunity, and funding needs.',
-      'Use the user’s inputs to outline a compelling pitch structure with data-backed storytelling and clear financial asks.',
-      'Provide persuasive talking points, slide-by-slide guidance, and investor FAQs tailored to the funding round.',
-      'Wrap up with a complete investor pitch deck outline that can be transferred into presentation software.'
+      'Write the final prompt as a direct command to an advanced AI presentation expert to build a persuasive investor pitch deck.',
+      'Mandate slide-by-slide structure covering problem, solution, market size, business model, traction, financials, team, roadmap, funding ask, and appendix/Q&A.',
+      'Inject the user’s responses as contextual data that must populate the slides, storytelling points, and metrics.',
+      'Require the deliverable to include headline messaging, supporting bullets, suggested visuals, and anticipated investor questions with crisp answers.'
     ],
     questions: [
       {
@@ -216,10 +216,10 @@ export const stages: Stage[] = [
     defaultDescription: 'Develop your go-to-market strategy',
     deliverableDescription: 'Deliver a multi-channel acquisition playbook including ICP profiles, messaging pillars, campaign concepts, funnel targets, and 30-60-90 day execution plan.',
     promptInstructions: [
-      'Concentrate exclusively on go-to-market planning, demand generation, and conversion optimisation.',
-      'Translate the user’s inputs into channel strategies, messaging pillars, and campaign roadmaps tied to measurable KPIs.',
-      'Recommend acquisition experiments, funnel improvements, and retention tactics aligned with the defined target customer.',
-      'Finish with a structured go-to-market plan outlining channels, messaging, calendar, and success metrics.'
+      'Write the final prompt as a direct command to an advanced growth strategist AI to produce a customer acquisition and marketing playbook.',
+      'Specify the need for ideal customer profiles, messaging pillars, multi-channel tactics, funnel stages, content calendar, KPIs, and experiment backlog.',
+      'Tie every recommendation to the user’s inputs (product, audience, budget, goals) and demand clear metrics and timelines.',
+      'Ensure the deliverable includes action steps for the next 30/60/90 days and measurement framework for optimisation.'
     ],
     questions: [
       {
@@ -277,10 +277,10 @@ export const stages: Stage[] = [
     defaultDescription: 'Plan for sustainable growth and scaling',
     deliverableDescription: 'Deliver a phased scaling roadmap with milestones, OKRs, resourcing plan, organizational changes, and risk mitigation strategies.',
     promptInstructions: [
-      'Stay focused on scaling strategies such as team expansion, market growth, and process maturation.',
-      'Convert the user’s responses into a phased growth plan with clear milestones, resource allocations, and risk mitigation.',
-      'Recommend operational dashboards, leadership hires, and strategic initiatives that sustain long-term growth.',
-      'Close with a timeline-based scaling roadmap that executives can review and approve.'
+      'Write the final prompt as a direct command to an advanced strategy AI to craft a phased scaling roadmap for the venture.',
+      'Demand milestone-based planning (short-, mid-, long-term), resource and headcount planning, market expansion moves, and risk mitigations.',
+      'Link all recommendations directly to the user’s context, highlighting KPIs, OKRs, and governance cadence.',
+      'Require the deliverable to include dashboards to monitor growth, key hires, partnership strategy, and contingency plans.'
     ],
     questions: [
       {
@@ -338,10 +338,10 @@ export const stages: Stage[] = [
     defaultDescription: 'Optimize operations and improve efficiency',
     deliverableDescription: 'Deliver an operations optimisation program detailing process maps, automation opportunities, KPI dashboards, cost-saving initiatives, and quality-control mechanisms.',
     promptInstructions: [
-      'Keep the prompt centred on operational efficiency, process optimisation, and quality assurance.',
-      'Translate the user’s inputs into streamlined workflows, automation opportunities, and KPI dashboards.',
-      'Provide a prioritised optimisation roadmap with quick wins, tooling recommendations, and governance practices.',
-      'Finish with an operations optimisation plan that can be executed by the operations team.'
+      'Write the final prompt as a direct command to an operational excellence AI to deliver a detailed operations optimisation program.',
+      'Insist on process mapping, automation opportunities, tooling recommendations, KPI dashboards, SOP updates, and cost-saving initiatives.',
+      'Map every optimisation to the user’s current challenges and targets, prioritising quick wins vs. strategic initiatives.',
+      'Require the deliverable to include implementation roadmap, RACI matrix, risk controls, and continuous improvement rituals.'
     ],
     questions: [
       {

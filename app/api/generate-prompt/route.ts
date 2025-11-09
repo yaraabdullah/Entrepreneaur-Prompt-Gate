@@ -110,10 +110,15 @@ RESPONSE FORMAT REQUIREMENTS:
 - Reference the user’s inputs explicitly so the guidance is personalized.
 - Remain within the scope of the ${stage.defaultTitle} stage and avoid unrelated recommendations.
 - If the user’s inputs describe a digital product, include guidance for crafting or refining the product experience (e.g., website or app structure) aligned with this stage.
+- Include a clearly labeled "Context" section that enumerates the user inputs before listing requirements.
+- Follow the context with structured sections (e.g., "Deliverable Requirements", "Constraints", "Output Format") tailored to the stage.
+- Output only the final prompt text—no explanations, apologies, or statements about yourself.
+- Phrase the prompt as an imperative instruction directed at the target AI (e.g., begin with "Generate...", "Create...", "Design...").
+- Never use first-person statements such as "I will" or "I am"; speak to the target AI as "you".
 - ${localeInstruction}
 
 EXPECTED OUTPUT:
-- ${stage.deliverableDescription}
+- The prompt must instruct the target AI to deliver: ${stage.deliverableDescription}
 
 Generate a comprehensive, best-practice-aligned prompt that will guide the entrepreneur through this stage. The prompt should be:
 - Well-structured with clear sections
