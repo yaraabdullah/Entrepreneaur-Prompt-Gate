@@ -33,7 +33,13 @@ async function listAvailableModels(): Promise<string[]> {
 
 export async function POST(request: NextRequest) {
   try {
-    const { stageId, answers } = await request.json()
+    const { stageId, answers, language } = await request.json()
+    const normalizedLanguage = language === 'ar' ? 'ar' : 'en'
+    const outputLanguageLabel = normalizedLanguage === 'ar' ? 'Arabic' : 'English'
+    const localeInstruction =
+      normalizedLanguage === 'ar'
+        ? 'اكتب المخرجات بالكامل باللغة العربية الفصحى الواضحة، مع الحفاظ على نفس البنية التنظيمية والاحترافية.'
+        : 'Write the entire output in clear, professional English.'
 
     if (!process.env.GEMINI_API_KEY) {
       return NextResponse.json(
@@ -104,6 +110,7 @@ RESPONSE FORMAT REQUIREMENTS:
 - Reference the user’s inputs explicitly so the guidance is personalized.
 - Remain within the scope of the ${stage.defaultTitle} stage and avoid unrelated recommendations.
 - If the user’s inputs describe a digital product, include guidance for crafting or refining the product experience (e.g., website or app structure) aligned with this stage.
+- ${localeInstruction}
 
 EXPECTED OUTPUT:
 - ${stage.deliverableDescription}

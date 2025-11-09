@@ -11,7 +11,7 @@ import NavigationButtons from '@/components/NavigationButtons'
 
 export default function Home() {
   const router = useRouter()
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [isChecking, setIsChecking] = useState(true)
   const [currentStageIndex, setCurrentStageIndex] = useState(0)
   const [allAnswers, setAllAnswers] = useState<{ [stageId: string]: StageAnswers }>({})
@@ -57,6 +57,7 @@ export default function Home() {
         body: JSON.stringify({
           stageId: currentStage.id,
           answers: currentAnswers,
+          language,
         }),
       })
 

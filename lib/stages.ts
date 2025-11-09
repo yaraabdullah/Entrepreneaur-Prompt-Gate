@@ -30,12 +30,12 @@ export const stages: Stage[] = [
     defaultTitle: 'Idea Generation & Business Model',
     descriptionKey: 'stage1Description',
     defaultDescription: 'Define your core business concept and validate your idea',
-    deliverableDescription: 'Deliver a visual business model canvas summarizing customer segments, value propositions, channels, customer relationships, revenue streams, key resources, key activities, key partners, cost structure, and suggested validation experiments.',
+    deliverableDescription: 'Deliver a visual business model canvas (or lean canvas) summarizing customer segments, value propositions, channels, customer relationships, revenue streams, key resources, key activities, key partners, cost structure, and suggested validation experiments.',
     promptInstructions: [
-      'Focus strictly on validating the business idea, problem-solution fit, and customer segments.',
+      'Focus strictly on validating the business idea, problem-solution fit, and customer segments—do not propose landing pages or MVP build-outs.',
       'Transform the user’s inputs into a clear value proposition, customer personas, and assumptions to test.',
       'Recommend lean validation experiments, data points to collect, and decision criteria before investing in development.',
-      'End with a structured business model canvas overview that is ready to hand off to designers for visualization.'
+      'End with a structured business model canvas (or lean canvas) overview that is ready to hand off to designers for visualization.'
     ],
     questions: [
       {
@@ -91,12 +91,13 @@ export const stages: Stage[] = [
     defaultTitle: 'MVP Development',
     descriptionKey: 'stage2Description',
     defaultDescription: 'Build and validate your minimum viable product',
-    deliverableDescription: 'Deliver a build-ready MVP blueprint describing the website or app architecture, user journeys, prioritized backlog, interface structure (sitemap or screen flow), and technical implementation guidance.',
+    deliverableDescription: 'Deliver a build-ready MVP landing page blueprint describing the site architecture, key sections/components, user journeys, prioritized backlog, wireframe guidance, and technical implementation notes.',
     promptInstructions: [
       'Remain fully focused on defining and building the MVP scope, including user journeys, feature prioritisation, and technical architecture.',
-      'Convert the user’s answers into a concrete MVP plan covering pages/screens, core workflows, and success metrics for a first release.',
-      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional website or app quickly.',
-      'Conclude with a detailed MVP website/app blueprint that a product squad can execute immediately.'
+      'Convert the user’s answers into a concrete MVP plan covering landing page sections, conversion goals, and supporting workflows for a first release.',
+      'Deliver implementation-ready guidance (tech stack, backlog, development roadmap) that enables shipping a functional landing page quickly.',
+      'Do not generate business model canvases or high-level strategy summaries—stay focused on the landing page experience and supporting MVP build.',
+      'Conclude with a detailed MVP landing page blueprint—including layout guidance and content prompts—that a product squad can execute immediately.'
     ],
     questions: [
       {
